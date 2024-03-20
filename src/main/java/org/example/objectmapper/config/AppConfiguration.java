@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static org.springframework.boot.convert.ApplicationConversionService.configure;
-
 @Configuration
 public class AppConfiguration {
 
