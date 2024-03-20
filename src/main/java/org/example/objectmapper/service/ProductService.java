@@ -6,5 +6,9 @@ public interface ProductService {
 
     Product save(String product);
 
-    Product get(Long id);
+    String get(Long id);
+
+    String getAll();
+
+    Product update(Long id, String product);
 }

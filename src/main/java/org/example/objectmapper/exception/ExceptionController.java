@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class ExceptionController {
+
     @ExceptionHandler
     private ResponseEntity<CustomResponse> handleException(JsonProcessingException e) {
         CustomResponse response = new CustomResponse("Wrong Json", LocalDateTime.now());

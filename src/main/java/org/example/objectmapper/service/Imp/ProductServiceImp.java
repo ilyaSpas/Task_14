@@ -11,6 +11,8 @@ import org.example.objectmapper.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImp implements ProductService {
 
@@ -42,7 +44,41 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public Product get(Long id) {
-        return productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+    public String get(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+        String productJson;
+        try {
+            productJson = objectMapper
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(product);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return productJson;
+    }
+
+    @SneakyThrows
+    @Override
+    public String getAll() {
+        List<Product> products = productRepository.findAll();
+        return objectMapper
+                .writerWithDefaultPrettyPrinter()
+                .writeValueAsString(products);
+    }
+
+    @Override
+    public Product update(Long id, String product) {
+        Product newProduct;
+        Product productFromDB = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+        try {
+            newProduct = objectMapper.readValue(product, Product.class);
+            productFromDB.setName(newProduct.getName());
+            productFromDB.setDescription(newProduct.getDescription());
+            productFromDB.setPrice(newProduct.getPrice());
+            productFromDB.setQuantityInStock(newProduct.getQuantityInStock());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return productRepository.save(productFromDB);
     }
 }
