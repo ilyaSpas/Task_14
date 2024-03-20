@@ -41,10 +41,8 @@ public class ProductServiceImp implements ProductService {
         return productRepository.save(product);
     }
 
-    @SneakyThrows
     @Override
-    public String get(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
-        return objectMapper.writeValueAsString(product);
+    public Product get(Long id) {
+        return productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
     }
 }

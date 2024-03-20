@@ -6,5 +6,5 @@ public interface ProductService {
 
     Product save(String product);
 
-    String get(Long id);
+    Product get(Long id);
 }
