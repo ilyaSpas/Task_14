@@ -1,14 +1,19 @@
 package org.example.objectmapper.service;
 
+import org.example.objectmapper.entity.Order;
 import org.example.objectmapper.entity.Product;
+
+import java.util.List;
 
 public interface ProductService {
 
-    Product save(String product);
+    Product save(Product product);
 
-    String get(Long id);
+    Product getById(Long id);
 
-    String getAll();
+    List<Product> getAll();
 
-    Product update(Long id, String product);
+    Product update(Long id, Product product);
+
+    void deleteById(Long id);
 }

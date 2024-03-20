@@ -19,8 +19,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER,
-    cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL)

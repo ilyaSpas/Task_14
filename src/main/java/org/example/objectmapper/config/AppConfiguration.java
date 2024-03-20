@@ -11,10 +11,6 @@ public class AppConfiguration {
 
     @Bean
     public ObjectMapper getObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
-        return objectMapper;
+        return new ObjectMapper();
     }
 }
